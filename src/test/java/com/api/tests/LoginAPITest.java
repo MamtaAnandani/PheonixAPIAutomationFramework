@@ -1,12 +1,15 @@
 package com.api.tests;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
 
-import static org.hamcrest.Matchers.*;
+import java.io.IOException;
 
 import org.testng.annotations.Test;
 
 import com.api.Pojo.UserCredentials;
+import static com.api.utils.ConfigManager.*;
 
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -14,11 +17,14 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 public class LoginAPITest {
 
 	@Test
-	public void LoginAPITest() {
-		UserCredentials userCreds = new UserCredentials("iamfd", "password");
+	public void LoginAPITest() throws IOException {
+		
+	  //ConfigManager configManager = new ConfigManager();
+		UserCredentials userCreds = new UserCredentials("iamfd", "password");//Model Pojo Object
+		
 
 		given()
-		.baseUri("http://64.227.160.186:9000/v1/")
+		.baseUri(getProperty("BASE_URI"))
 		.and().contentType(ContentType.JSON)
 		.accept(ContentType.JSON)
 		.and()
