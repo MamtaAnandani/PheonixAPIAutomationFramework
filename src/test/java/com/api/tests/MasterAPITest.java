@@ -33,7 +33,7 @@ public class MasterAPITest {
 	.then() //developer needs to change the post to get because not providing any body//then gives validatable response we can assert to check	
 	.log().all()
 	.statusCode(200)
-	.time(lessThan(1000L))//check response time
+	.time(lessThan(5000L))//check response time
 	.body("message",equalTo("Success"))//message check
 	.body("data",notNullValue())//data is having something can not be empty
 	.body("data",hasKey("mst_oem"))

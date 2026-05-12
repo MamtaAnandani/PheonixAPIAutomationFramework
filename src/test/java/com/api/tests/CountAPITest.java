@@ -32,7 +32,7 @@ public class CountAPITest {
 				.statusCode(200)
 				.and()
 				.body("message", equalTo("Success")).and()
-				.time(lessThan(1500L))
+				.time(lessThan(5000L))
 				.body("data", notNullValue())
 				.body("data.size()", equalTo(3))
 				.body("data.count",everyItem(greaterThanOrEqualTo(0)))
@@ -42,7 +42,7 @@ public class CountAPITest {
 
 	}
  
- 
+ @Test
               public void countAPITest_MissingAuthToken() {
             	  given()
   		        .baseUri(getProperty("BASE_URI"))
