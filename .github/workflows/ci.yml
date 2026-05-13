@@ -1,20 +1,21 @@
-name: Pheonix Test Automation WorkFlow
+name: Phoenix Test Automation Workflow
+
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
- schedule: #Set the cron for midnight IST - git hub action supports the utc format
-   - cron: "30 18 * * *" #the 1* means month 2*means week 3* means day 18:30 means 6:30 pm UTC and 12:00am IST
-
-workFlow_dispatch:
-  inputs:
-    env:
-      discription: "Environment"
-      type: choice
-      options: [qa, uat, dev]
-      default: qa
-      required: true
+  schedule:
+    # 18:30 UTC is 00:00 IST (Midnight) #Set the cron for midnight IST - git hub action supports the utc format
+    - cron: "30 18 * * *"   #the 1* means month 2*means week 3* means day 18:30 means 6:30 pm UTC and 12:00am IST
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment"
+        type: choice
+        options: [qa, uat, dev]
+        default: qa
+        required: true
 
 jobs:
   test:
