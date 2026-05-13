@@ -6,10 +6,8 @@ on:
   pull_request:
     branches: [ "master" ]
   schedule:
-    # 18:30 UTC is 00:00 IST (Midnight) #Set the cron for midnight IST - git hub action supports the utc format
-    - cron: "30 18 * * *"   #the 1* means month 2*means week 3* means day 18:30 means 6:30 pm UTC and 12:00am IST
-
-   workflow_dispatch: 
+    - cron: "30 18 * * *" # 18:30 UTC is 00:00 IST (Midnight) #Set the cron for midnight IST - git hub action supports the utc format, #the 1* means month 2*means week 3* means day 18:30 means 6:30 pm UTC and 12:00am IST
+  workflow_dispatch:
      inputs:
         env:
           description: "Environment"
