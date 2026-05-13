@@ -4,6 +4,17 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+ schedule: #Set the cron for midnight IST - git hub action supports the utc format
+   - cron: "30 18 * * *" #the 1* means month 2*means week 3* means day 18:30 means 6:30 pm UTC and 12:00am IST
+
+workFlow_dispatch:
+  inputs:
+    env:
+      discription: "Environment"
+      type: choice
+      options: [qa, uat, dev]
+      default: qa
+      required: true
 
 jobs:
   test:
@@ -21,7 +32,7 @@ jobs:
         cache: maven
         
     - name: Execute Test Automation Framework
-      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv=qa
+      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv="${{github.event.inputs.env}}"
 
     - name: Upload a Build Artifact
       if: always()
