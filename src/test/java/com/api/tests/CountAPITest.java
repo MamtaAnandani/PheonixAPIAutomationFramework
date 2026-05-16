@@ -7,6 +7,8 @@ import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
 import com.api.constant.Role;
+import com.api.utils.SpecUtil;
+
 import static com.api.utils.AuthTokenProvider.*;
 
 import io.restassured.http.ContentType;
@@ -19,21 +21,22 @@ public class CountAPITest {
 	public void verifyCountAPITest() {
 
 		given()
-		        .baseUri(getProperty("BASE_URI"))
-		        .and()
-		        .header("Authorization",getToken(Role.FD)) // Raw header take care of extra white
-			    .log().uri()// space and don't make the mistakes
-			    .log().headers()
-			    .log().method()
+				/*
+				 * .baseUri(getProperty("BASE_URI")) .and()
+				 * .header("Authorization",getToken(Role.FD)) // Raw header take care of extra
+				 * white .log().uri()// space and don't make the mistakes .log().headers()
+				 * .log().method()
+				 */
+		        .spec(SpecUtil.requestSpecWithAuth(Role.FD))
 				.when()
 				.get("/dashboard/count")
 				.then()
-				.log().all()
-				.statusCode(200)
-				.and()
-				.body("message", equalTo("Success")).and()
-				.time(lessThan(5000L))
+				/*
+				 * .log().all() .statusCode(200) .and() .time(lessThan(5000L))
+				 */
+				.spec(SpecUtil.responseSpec_OK())
 				.body("data", notNullValue())
+				.body("message", equalTo("Success")).and()
 				.body("data.size()", equalTo(3))
 				.body("data.count",everyItem(greaterThanOrEqualTo(0)))
 				.body("data.label",everyItem(not(blankOrNullString())))
@@ -53,8 +56,9 @@ public class CountAPITest {
   				.when()
   				.get("/dashboard/count")
   				.then()
-  				.log().all()
-  				.statusCode(401);
+  				/*.log().all()
+  				.statusCode(401);*/
+  				.spec(SpecUtil.responseSpec_TEXT(401));
 	 
  }
 }
