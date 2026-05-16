@@ -6,6 +6,7 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -20,20 +21,21 @@ public class MasterAPITest {
 	public void masterAPITest() {
 	
 	given()  //Returns request specification - configure the required things
-	.baseUri(getProperty("BASE_URI")) //helper method
-	.and() //Readability
-	.header("Authorization", getToken(FD)) //Raw header
-	.and()
-	.contentType("") //empty content type post request without body bad practice 
-	.log().uri()
-	.log().headers()
-	.log().method()
+			/*
+			 * .baseUri(getProperty("BASE_URI")) //helper method .and() //Readability
+			 * .header("Authorization", getToken(FD)) //Raw header .and() .contentType("")
+			 * //empty content type post request without body bad practice .log().uri()
+			 * .log().headers() .log().method()
+			 */
+	.spec(SpecUtil.requestSpecWithAuth(FD))
 	.when() //action
 	.post("master") //whenever making post request the default content type added implicitly application/url-formencoded 
 	.then() //developer needs to change the post to get because not providing any body//then gives validatable response we can assert to check	
-	.log().all()
-	.statusCode(200)
-	.time(lessThan(5000L))//check response time
+			/*
+			 * .log().all() .statusCode(200) .time(lessThan(5000L))
+			 *///check response time
+	
+	.spec(SpecUtil.responseSpec_OK())
 	.body("message",equalTo("Success"))//message check
 	.body("data",notNullValue())//data is having something can not be empty
 	.body("data",hasKey("mst_oem"))
@@ -50,17 +52,17 @@ public class MasterAPITest {
 @Test
 public void invalidTokenForMasterAPITest() {
 	given()
-	.baseUri(ConfigManager.getProperty("BASE_URI"))
-    .and()
-    .header("Authorization", "")
-    .and()
-    .contentType("")
-    .and()
+			/*
+			 * .baseUri(ConfigManager.getProperty("BASE_URI")) .and()
+			 * .header("Authorization", "") .and() .contentType("") .and()
+			 */
+	.spec(SpecUtil.requestSpec())
     .when()
     .post("master")
     .then()
-    .log().all()
-    .statusCode(401);
+    /*.log().all()
+    .statusCode(401)*/
+    .spec(SpecUtil.responseSpec_TEXT(401));
    
 	
 	}
