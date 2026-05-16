@@ -8,6 +8,7 @@ on:
   schedule:
     - cron: "30 18 * * *" # 18:30 UTC is 00:00 IST (Midnight) #Set the cron for midnight IST - git hub action supports the utc format, #the 1* means month 2*means week 3* means day 18:30 means 6:30 pm UTC and 12:00am IST
     - cron: "30 17 * * *"
+    - cron: "30 16 * * *"
   workflow_dispatch:
      inputs:
         env:
