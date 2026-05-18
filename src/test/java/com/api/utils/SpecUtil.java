@@ -65,6 +65,22 @@ public class SpecUtil {
 	
 	}
 	
+public static RequestSpecification requestSpecWithAuth(Role role, Object payload) {
+		
+		RequestSpecification	requestSpecification = new RequestSpecBuilder()
+		.setBaseUri(getProperty("BASE_URI"))
+		.setContentType(ContentType.JSON)
+		.setAccept(ContentType.JSON)
+		.addHeader("Authorization", AuthTokenProvider.getToken(role))
+		.setBody(payload)
+		.log(LogDetail.URI)
+		.log(LogDetail.HEADERS)
+		.log(LogDetail.METHOD)
+		.log(LogDetail.BODY)
+		.build();
+		return requestSpecification;
+	
+	}
 	public static ResponseSpecification responseSpec_OK() {//here we give the data type of reference variable
 		ResponseSpecification responseSpecification = new ResponseSpecBuilder()
 		.expectContentType(ContentType.JSON)
