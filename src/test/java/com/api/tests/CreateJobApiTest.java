@@ -10,13 +10,13 @@ import java.util.List;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import com.api.Pojo.CreateJobPayload;
-import com.api.Pojo.Customer;
-import com.api.Pojo.Customer1;
-import com.api.Pojo.CustomerAddress;
-import com.api.Pojo.CustomerProduct;
-import com.api.Pojo.Problems;
 import com.api.constant.Role;
+import com.api.request.model.CreateJobPayload;
+import com.api.request.model.Customer;
+import com.api.request.model.Customer1;
+import com.api.request.model.CustomerAddress;
+import com.api.request.model.CustomerProduct;
+import com.api.request.model.Problems;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;

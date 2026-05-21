@@ -1,4 +1,4 @@
-package com.api.Pojo;
+package com.api.request.model;
 
 public record Customer1  //immutable to optimize the Pojo class we have used it comes with java 16
 	  (String first_name, 

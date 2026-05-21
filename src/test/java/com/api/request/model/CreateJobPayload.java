@@ -1,4 +1,4 @@
-package com.api.Pojo;
+package com.api.request.model;
 
 import java.util.Arrays;
 import java.util.List;

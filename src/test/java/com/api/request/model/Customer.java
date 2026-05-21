@@ -1,7 +1,7 @@
-package com.api.Pojo;
+package com.api.request.model;
 
-public class Customer {
- private String	first_name;
+public class Customer {  //we need to reduce the BoilerPlate code in DTO (Data Transfer Object - Pojo classes)
+ private String	first_name; //Pojo class means constructor, getters and setters, to string method, instance variable
  private String last_name;
  private String mobile_number;     //the key name is same as the variable name in payload we have created different pojo as there is nested json
  private String mobile_number_alt;
@@ -13,8 +13,8 @@ public class Customer {
 	this.first_name = first_name;
 	this.last_name = last_name;
 	this.mobile_number = mobile_number;
-	this.mobile_number_alt = mobile_number_alt;
-	this.email_id = email_id;
+	this.mobile_number_alt = mobile_number_alt;  //Pojo class having allot of boiler plate code
+	this.email_id = email_id;//to optimize this classes we can have record class
 	this.email_id_alt = email_id_alt;
  }
 
