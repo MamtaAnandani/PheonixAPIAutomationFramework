@@ -10,7 +10,14 @@ import java.util.List;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import com.api.constant.Model;
+import com.api.constant.OEM;
+import com.api.constant.Platform;
+import com.api.constant.Problem;
+import com.api.constant.Product;
 import com.api.constant.Role;
+import com.api.constant.ServiceLocation;
+import com.api.constant.warranty_status;
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.Customer1;
@@ -32,13 +39,13 @@ public class CreateJobApiTest {
 		Customer1 customer = new Customer1("Mamta", "Anandani", "9765874373", "", "mamta.anandani92@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("233", "Kapils recidency", "VinayNagar", "RTO road", "east",
 				"452009", "India", "Madhya Pradesh");
-		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10),"86603255067717",
-				"86603255067717", "86603255067717", getTimeWithDaysAgo(10), 1, 1); //Here the date and time need to fix while writing the mistakes can be made
-		Problems problems = new Problems(1, "Battery Issue");
+		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10),"92603255067717",
+				"92603255067717", "92603255067717", getTimeWithDaysAgo(10), Product.Nexus_2.getCode(), Model.NEXUS_2_BLUE.getCode()); //Here the date and time need to fix while writing the mistakes can be made
+		Problems problems = new Problems(Problem.OVERHEATING.getCode(), "Battery Issue");
 		List<Problems> problemlist = new ArrayList<Problems>();
 		problemlist.add(problems);
 		
-		CreateJobPayload createJobPayload = new CreateJobPayload(0, 2, 1, 1, customer, customerAddress,customerProduct , problemlist);
+		CreateJobPayload createJobPayload = new CreateJobPayload(ServiceLocation.Service_Location_A.getCode(), Platform.FRONT_DESK.getCode(), warranty_status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAddress,customerProduct , problemlist);
 
 		given()
 		.spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
