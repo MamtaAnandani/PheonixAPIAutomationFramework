@@ -3,8 +3,8 @@ package com.api.utils;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-import com.api.Pojo.UserCredentials;
 import com.api.constant.Role;
+import com.api.request.model.UserCredentials;
 
 import  static com.api.constant.Role.*;
 
