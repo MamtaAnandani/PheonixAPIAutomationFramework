@@ -8,13 +8,14 @@ import java.io.IOException;
 
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
 public class UserDetailsAPITest {
 
-	@Test
+	@Test(description = "Verifying the user details api response is correctly shown", groups = { "api", "regression",
+			"smoke" })
 	public void userDetailsAPITest() throws IOException {
-     // ConfigManager configManager = new ConfigManager();
+		// ConfigManager configManager = new ConfigManager();
 		/* Header authHeader = new Header("Authorization", getToken(QC)); */
 		given()
 				/*
@@ -22,13 +23,9 @@ public class UserDetailsAPITest {
 				 * .accept(ContentType.JSON) .log().uri() .log().body() .log().headers()
 				 * .log().method()
 				 */
-		.spec(SpecUtil.requestSpecWithAuth(FD))
-		.when()
-		.get("userdetails")
-		.then()
-		.spec(SpecUtil.responseSpec_OK())
-		.and()
-		.body(matchesJsonSchemaInClasspath("response_schema/UserDetailsResponseSchema.json"));
+				.spec(requestSpecWithAuth(FD)).when().get("userdetails").then()
+				.spec(responseSpec_OK()).and()
+				.body(matchesJsonSchemaInClasspath("response_schema/UserDetailsResponseSchema.json"));
 
 	}
 
